@@ -1,2 +1,5 @@
 *.ini
 *.txt
+*.jpg
+*.png
+img/
