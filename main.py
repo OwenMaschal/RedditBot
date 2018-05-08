@@ -1,11 +1,17 @@
-import praw, requests, shutil, re, json, pathlib
+import praw
+import requests
+import shutil
+import re
+import json
+import pathlib
+import logging
 
 def request_imgur_image(file_url):
     regex2 = re.compile('^https://imgur.com/a/([a-zA-Z0-9]*)$')
     m = regex2.match(file_url)
-    if m:
-        #print('This is an album! We are going to ignore these for now.')
-    else: # This is a single image
+    if m: # Imgur Album Link
+        print('This is an album! This has not been implemented yet :(.')
+    else: # Imgur image link
         request_image(file_url + '.jpg')
 
 def request_image(file_url):
@@ -18,18 +24,24 @@ def request_image(file_url):
     else:
         req.raise_for_status()
 
+def setup_praw_logging():
+    handler = logging.StreamHandler()
+    handler.setLevel(logging.DEBUG)
+    logger = logging.getLogger('prawcore')
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(handler)
+
 def main():
-    #print('Authenticating...')
+    setup_praw_logging();
     reddit = praw.Reddit('bot1')
-    #print('Authentication successful!')
     subreddit = reddit.subreddit('wallpapers')
+
     regex = re.compile('^https://imgur.com/')
     pathlib.Path('./img/').mkdir(parents=True, exist_ok=True)
     for submission in subreddit.top('day', limit=10):
-        #print(submission.url)
-        if regex.match(submission.url):
+        if regex.match(submission.url): # Is an Imgur link
             request_imgur_image(submission.url)
-        else: # Direct image link
-           request_image(submission.url)
+        else: # Direct image link (i.reddit)
+            request_image(submission.url)
 
 main()
