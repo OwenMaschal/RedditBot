@@ -6,6 +6,8 @@ import json
 import pathlib
 import logging
 
+images_to_get = 10 # Number of images you want to download
+
 def request_imgur_image(file_url):
     regex2 = re.compile('^https://imgur.com/a/([a-zA-Z0-9]*)$')
     m = regex2.match(file_url)
@@ -38,10 +40,12 @@ def main():
 
     regex = re.compile('^https://imgur.com/')
     pathlib.Path('./img/').mkdir(parents=True, exist_ok=True)
-    for submission in subreddit.top('day', limit=10):
-        if regex.match(submission.url): # Is an Imgur link
-            request_imgur_image(submission.url)
-        else: # Direct image link (i.reddit)
-            request_image(submission.url)
+
+    for submission in subreddit.top('day', limit=images_to_get):
+        if not submission.is_self: # Ignore self posts
+            if regex.match(submission.url): # Is an Imgur link
+                request_imgur_image(submission.url)
+            else: # Direct image link (i.reddit)
+                request_image(submission.url)
 
 main()
