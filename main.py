@@ -4,12 +4,16 @@ import re
 import pathlib
 import logging
 import urllib.request
+import configparser
 
-images_to_get = 50              # Number of images you want to download
-output_location = './img/'      # Image output location. Default: ./img/
-bot_name = 'bot1'               # Name of your bot definted in praw.ini
-subreddit_name = 'wallpapers'   # Name of subreddit to extract images from
-time_period = 'week'
+config = configparser.ConfigParser()
+config.read('config.cfg')
+
+image_num = int(config.get('DEFAULTS', 'image_num'))
+output_location = config.get('DEFAULTS','output_location')
+bot_name = config.get('DEFAULTS','bot')
+subreddit_name = config.get('DEFAULTS','subreddit')
+time_period = config.get('DEFAULTS','time')
 
 # Check if the url has an extension
 # (Example: https://imgur.com/fa33.jpg matches)
@@ -25,11 +29,9 @@ def setup_praw_logging():
 def download_image(submission):
     if not submission.is_self: # Ignore self posts
         try:
-            if not regex.match(submission.url):
-                # If the link is missing a file extension, add it
-                submission.url = submission.url + '.jpg'
-            print(submission.id + ': ' +submission.url)
-            urllib.request.urlretrieve(submission.url, output_location + submission.id + '.jpg')
+            # This line grabs the image from the url
+            urllib.request.urlretrieve(submission.url,
+                output_location + submission.id + '.jpg')
         except Exception as e:
             print(str(e) + ' at URL: ' + submission.url)
 
@@ -43,7 +45,7 @@ def main():
     pathlib.Path(output_location).mkdir(parents=True, exist_ok=True)
 
     # Get 'images_to_get' submissions and download the image from each
-    for submission in subreddit.top(time_period, limit=images_to_get):
+    for submission in subreddit.top(time_period, limit=image_num):
         download_image(submission)
 
 main()
