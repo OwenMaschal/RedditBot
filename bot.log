@@ -1,0 +1,6 @@
+2018-05-09 19:55:11,899 DEBUG Starting...
+2018-05-09 19:55:11,899 DEBUG Fetching: GET https://oauth.reddit.com/r/wallpapers/top
+2018-05-09 19:55:11,899 DEBUG Data: None
+2018-05-09 19:55:11,899 DEBUG Params: {'t': 'all', 'limit': 25, 'raw_json': 1}
+2018-05-09 19:55:12,445 DEBUG Response: 200 (13872 bytes)
+2018-05-09 19:55:19,202 DEBUG Completed. Time taken: 0:00:07.302984
