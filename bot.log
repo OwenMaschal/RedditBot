@@ -20,3 +20,10 @@
 2018-05-10 15:33:54,299 - DEBUG - sessions - Response: 200 (15040 bytes)
 2018-05-10 15:33:58,494 - ERROR - downloadimages - <urlopen error [Errno 11001] getaddrinfo failed> at URL: https://i.sli.mg/mwl3jS.jpg
 2018-05-10 15:33:59,394 - DEBUG - main - Completed. Time taken: 0:00:05.710982
+2018-05-10 15:38:26,626 - DEBUG - main - Starting...
+2018-05-10 15:38:26,638 - DEBUG - sessions - Fetching: GET https://oauth.reddit.com/r/pics/top
+2018-05-10 15:38:26,638 - DEBUG - sessions - Data: None
+2018-05-10 15:38:26,638 - DEBUG - sessions - Params: {'t': 'all', 'limit': 25, 'raw_json': 1}
+2018-05-10 15:38:27,255 - DEBUG - sessions - Response: 200 (15034 bytes)
+2018-05-10 15:38:31,398 - ERROR - downloadimages - <urlopen error [Errno 11001] getaddrinfo failed> at URL: https://i.sli.mg/mwl3jS.jpg
+2018-05-10 15:38:32,238 - DEBUG - main - Completed. Time taken: 0:00:05.611268

@@ -14,7 +14,7 @@ def main():
     image_num = int(config.get('DEFAULTS', 'image_num'))
     output_location = config.get('DEFAULTS','output_location')
     bot_name = config.get('DEFAULTS','bot')
-    subreddit_na    me = config.get('DEFAULTS','subreddit')
+    subreddit_name = config.get('DEFAULTS','subreddit')
     time_period = config.get('DEFAULTS','time')
     log_location = config.get('DEFAULTS', 'log_location')
 

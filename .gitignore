@@ -2,7 +2,7 @@ praw.ini
 *.txt
 *.jpg
 *.png
-img/
 *.log
 *.pyc
 __pycache__
+img/
