@@ -3,3 +3,6 @@ praw.ini
 *.jpg
 *.png
 img/
+*.log
+*.pyc
+__pycache__
